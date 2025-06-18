@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: bdg-wingo-gui
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run gui_predictor.py
+
+  - type: worker
+    name: bdg-wingo-datafetcher
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python get_data.py
+
+  - type: worker
+    name: bdg-wingo-trainer
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python train_and_predict.py
